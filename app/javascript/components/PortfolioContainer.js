@@ -9,7 +9,6 @@ class PortfolioContainer extends Component {
     super(props)
 
     this.state = {
-      name: '',
       portfolio: [],
       search_results: [],
       active_currency: null,
@@ -32,22 +31,29 @@ class PortfolioContainer extends Component {
       .catch((data) => {
       debugger
       })
-
-    console.log(this.state.search_results)
   }
 
   handleSelect(e) {
     e.preventDefault()
     const id = e.target.getAttribute('data-id')
     const activeCurrency = this.state.search_results.filter( item => item.id == parseInt(id))
-    debugger
+    this.setState({
+      active_currency: activeCurrency[0],
+      search_results: []
+    })
   }
 
   render() {
+    const searchOrCalculate = this.state.active_currency ?
+      <Calculate /> :
+      <Search
+        handleSelect={this.handleSelect}
+        searchResults={this.state.search_results}
+        handleChange={this.handleChange} />
+
     return (
       <div>
-        <Search handleSelect={this.handleSelect} searchResults={this.state.search_results} handleChange={this.handleChange}/>
-        <Calculate/>
+        {searchOrCalculate}
       </div>
     )
   }
