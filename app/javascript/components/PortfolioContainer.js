@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Search from "./Search";
 import Calculate from "./Calculate";
 //Helps React send POST requests to rails backend
@@ -11,36 +11,43 @@ class PortfolioContainer extends Component {
     this.state = {
       name: '',
       portfolio: [],
-      search_result: [],
+      search_results: [],
       active_currency: null,
       amount: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   handleChange(e) {
-    // this.setState({
-    //   [e.target.name]: e.target.value
-    // })
-
     axios.post('http://localhost:3000/search', {
       search: e.target.value
     })
       .then((data) => {
-        debugger
+        this.setState({
+          search_results: [...data.data.currencies]
+        })
       })
       .catch((data) => {
+      debugger
+      })
+
+    console.log(this.state.search_results)
+  }
+
+  handleSelect(e) {
+    e.preventDefault()
+    const id = e.target.getAttribute('data-id')
+    const activeCurrency = this.state.search_results.filter( item => item.id == parseInt(id))
     debugger
-    })
-    console.log(this.state.name)
   }
 
   render() {
-    return(
+    return (
       <div>
-        <Search handleChange={this.handleChange} />
-        <Calculate />
+        <Search handleSelect={this.handleSelect} searchResults={this.state.search_results} handleChange={this.handleChange}/>
+        <Calculate/>
       </div>
     )
   }
