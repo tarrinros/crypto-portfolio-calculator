@@ -1,24 +1,32 @@
-# README
+# Cryptocurrency portfolio calculator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+created by [youtube manual](https://www.youtube.com/watch?v=dpYPLUO3QcI).
 
-Things you may want to cover:
+[Cryptocurrency portfolio calculator](https://cryptocur-portfolio.herokuapp.com/) - heroku deployed example 
 
-* Ruby version
+### Requirements
 
-* System dependencies
+`ruby >= 2.5.0`
 
-* Configuration
+`rails ~> 5.2.0`
 
-* Database creation
+### Installation & using
 
-* Database initialization
+In `terminal` or `cmd`
 
-* How to run the test suite
+- `$ git clone repository_link`
 
-* Services (job queues, cache servers, search engines, etc.)
+- `$ gem install bundler` - if needed
 
-* Deployment instructions
+- `$ bundle install`
 
-* ...
+- `$ rails db:migrate` to migrate database
+
+- `$ rails db:seed` to fill database by cryptocurrencies
+
+- `$ rails s` for server starting
+
+- `$ ./bin/webpack-dev-server` for compiling assets by webpack
+
+
+Then open `http://localhost:3000` at your web-browser
